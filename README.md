@@ -12,7 +12,7 @@ Pantiltcamera is a project that provides ServoController scripts to work with Mo
 
 ## Installation
 ### 1. get motionEye running
-Here is a short [guidline](./motionEyeInstallGuide.md) on how to set up motioneye on a Raspberry pi Zero (should work with all other boards as well).
+Here is a short [guidline](./motionEyeInstallGuide.md) on how to set up motioneye on a Raspberry pi Zero 2 W (should work with all other boards as well).
 
 ### 2. implement motionEye's Action Buttons
 possible TODO: add cmake to make install process easier
