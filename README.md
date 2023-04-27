@@ -7,7 +7,9 @@ This repository contains code for a camera system that can pan and tilt. Using f
 - Description
 - Installation
 - Usage
+- Schematic
 - License
+- Pictures
 
 ## Description
 Pantiltcamera is a project that provides ServoController scripts to work with MotionEye and create a rotatable surveillance camera system.  It is intended to be used with a rotatable turret or something similar. The class initializes a servo motor using the GPIOZero library and allows the user to move the servo to a desired angle.
@@ -35,8 +37,19 @@ By calling the moveServo.py function we can pass a pin a method name and an opti
     # Define the dictionary of valid pins and their corresponding directions
     valid_pins = {12: 'horizontal', 13: 'vertical'}
 
-I hope this helps although o wont guarantee anything, let me know if you run into problems.
-contact information: matthiasbraun@gmx.at
+## Schematic
+
+![fritzing sketch](./doc/schematic.jpg)
+
+-------------------
+
+I hope this helps although i wont guarantee anything.
+
+-----------------
 
 ## License
 Pantiltcamera is released under the GPL 3.0 license.
+
+## Pictures
+![picture1](./doc/IMG_20230425_124118.jpg)
+![picture1](./doc/IMG_20230425_170722.jpg)
