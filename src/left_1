@@ -1,2 +1,2 @@
 #!/bin/bash
-python pleft_1.py
+python moveServo.py 12 'down' 20

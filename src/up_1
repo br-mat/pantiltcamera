@@ -1,0 +1,2 @@
+#!/bin/bash
+python moveServo.py 13 'up' 20

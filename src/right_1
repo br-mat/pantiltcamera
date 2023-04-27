@@ -1,2 +1,2 @@
 #!/bin/bash
-python pight_1.py
+python moveServo.py 12 'up' 20
