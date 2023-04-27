@@ -11,6 +11,7 @@ First we need to get the Raspberry Image on the SD card. For that you can use th
 <br>
 
 Then select like shown below the OS, you can try others as well make sure to use the latest guide from Motioneye then to complete the installation.
+
 ![Picture 1: bake OS](/doc/imager.jpg "bake OS")
 
 Reinsert your SD card and create a file on the card. called 'wpa_supplicant.conf', this file should give you access to your local Network:
