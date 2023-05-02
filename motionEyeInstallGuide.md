@@ -1,4 +1,4 @@
-Thanks to the documentation of motioneye it is a really simple setup process to make motionEye run on your system. For the Original information click:
+Thanks to the documentation of motionEye it is a really simple setup process to make motionEye run on your system. For the original information click:
 - [Bullseye](https://github.com/motioneye-project/motioneye/wiki/Install-on-Raspbian-Bullseye)
 - [Buster](https://github.com/motioneye-project/motioneye/wiki/Install-On-Raspbian)
 
@@ -10,11 +10,11 @@ First we need to get the Raspberry Image on the SD card. For that you can use th
 
 <br>
 
-Then select like shown below the OS, you can try others as well make sure to use the latest guide from Motioneye then to complete the installation.
+Then select the OS like shown below. You can try others as well but make sure to use the latest guide from motionEye to complete the installation.
 
 ![Picture 1: bake OS](/doc/imager.jpg "bake OS")
 
-Reinsert your SD card and create a file on the card. called 'wpa_supplicant.conf', this file should give you access to your local Network:
+Reinsert your SD card and create a file on the card called 'wpa_supplicant.conf', this file should give you access to your local Network:
 
     country=yourCOUTRYCODE
     update_config=1
@@ -51,7 +51,7 @@ install a bunch of packages (execute ALL following code line by line!!!)
 
     libcurl4-openssl-dev libjpeg-dev libz-dev -y
 
-Hint, if you run into an issue with pill: (if pill hang at 99% run the following: 'apt-get install python-pil -y' and then again 'pip install motioneye')
+Hint: if you run into an issue with pill --> (if pill hang at 99% run the following: 'apt-get install python-pil -y' and then again 'pip install motioneye')
 
     pip install motioneye
 
