@@ -1,6 +1,15 @@
 """
     This code should make use ot the ServoControllerClass to implement a rotating camera turret with motion eye (or somthing else).
     Copyright (C) 2023  br-mat
+    
+    Function description:
+    This script is used to move a camera's servo motor incrementally by a specified degree in either an up or down direction.
+    You need a position file in JSON format that contains angle data for the horizontal and/or vertical servo positions.
+    Useing ServoControllerClass to control the servo and reads the servo's current position from a position file in JSON format.
+    Provide command line arguments (2 needed 1 optional): the GPIO pin number for the servo, the direction ('up' or 'down'), and the degree of movement (default 20).
+    The script then moves the servos incrementally based on the specified degree value, if no angle is passed it will move a default value.
+    The direction of movement is determined by the method used.
+
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,14 +37,15 @@ if __name__ == '__main__':
     # Parse the command line arguments
     pin = int(sys.argv[1])
     mode = sys.argv[2]
-    degree = int(sys.argv[3]) if len(sys.argv) > 3 else 10
+    degree = int(sys.argv[3]) if len(sys.argv) > 3 else 20
 
     # Define the dictionary of valid pins and their corresponding directions
-    valid_pins = {12: 'horizontal', 13: 'vertical'}
+    # HINT: Class will validate keys in the position file to match 'horizontal or 'vertical'
+    valid_direction = {12: 'horizontal', 13: 'vertical'}
 
-    # Check that the pin argument is in the valid_pins dictionary
-    if pin not in valid_pins:
-        raise ValueError(f"Error: PIN must be one of {list(valid_pins.keys())}")
+    # Check that the pin argument is in the valid_direction dictionary
+    if pin not in valid_direction:
+        raise ValueError(f"Error: PIN must be one of {list(valid_direction.keys())}")
 
     # Check that the mode argument is either 'up' or 'down'
     if mode not in ['up', 'down']:
@@ -46,7 +56,7 @@ if __name__ == '__main__':
         raise ValueError("Error: DEGREE must be between 0 and 360")
 
     # Create a servo controller instance for the specified pin and direction
-    controller = ServoController(pin, valid_pins[pin])
+    controller = ServoController(pin, valid_direction[pin], '/home/youruser/pantiltcamera/src/position.json')
 
     # Move the servo up or down based on the mode argument
     if mode == 'up':
