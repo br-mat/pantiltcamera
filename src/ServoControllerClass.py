@@ -16,24 +16,23 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 from gpiozero import Servo
 from gpiozero.pins.pigpio import PiGPIOFactory
 import time
 import json
 
 class ServoController:
-    def __init__(self, servo_pin: int, direction: str):
+    def __init__(self, servo_pin: int, direction: str, position_file: str):
         # Initialize GPIO and servo motor
         self.factory = PiGPIOFactory()
         self.servo = Servo(servo_pin, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000, pin_factory=self.factory)
         
-        # Store the direction and position
+        # Store the direction, position file path, and position
         self.dir = direction.lower()[:10]
-        self.position_file = '/home/youruser/pantiltcamera/src/position.json'
+        self.position_file = position_file
         self.position = self.load_position()
 
-    def validate_position(data):
+    def validate_position(self, data):
         # Define the expected keys for the data dictionary
         expected_keys = {"horizontal", "vertical"}
         
@@ -51,16 +50,23 @@ class ServoController:
         return True
 
     def move(self, angle: int):
-        # Limit angle
-        angle = max(min(angle, 180), 0)
+        # Move the servo down by increasing the position by degree
+        try:
+            degree_int = int(angle)
+        except ValueError:
+            raise ValueError("Invalid turn angle. Please provide a number.")
         
-        # Convert angle to value and move servo
-        value = (angle / 180.0) * 2 - 1
+        # change position
+        self.position += degree_int
+        # Limit angle
+        self.position = max(min(self.position, 180), 0)
+        
+        # Convert angle and move servo
+        value = (self.position / 180.0) * 2 - 1
         self.servo.value = value
-        time.sleep(0.5)
+        time.sleep(0.3)
         
         # Update and save the new position
-        self.position = angle
         self.save_position()
 
     def load_position(self):
@@ -92,26 +98,6 @@ class ServoController:
             # Save the position to the file for all directions
             with open(self.position_file, 'w') as f:
                 json.dump(data, f)
-            
-    def down(self, degree):
-        # Move the servo down by increasing the position by 15
-        try:
-            degree_int = int(degree)
-        except ValueError:
-            raise ValueError("Invalid turn angle. Please provide a number.")
-        degree_int = max(min(degree_int, 180), 0)
-        self.position += degree_int
-        self.move(self.position)
-
-    def down(self, degree):
-        # Move the servo down by increasing the position by 15
-        try:
-            degree_int = int(degree)
-        except ValueError:
-            raise ValueError("Invalid turn angle. Please provide a number.")
-        degree_int = max(min(degree_int, 180), 0)
-        self.position += degree_int
-        self.move(self.position)
 
     def cleanup(self):
         # Stop the servo motor and clean up GPIO pins

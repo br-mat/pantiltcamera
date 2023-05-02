@@ -60,11 +60,11 @@ if __name__ == '__main__':
 
     # Move the servo up or down based on the mode argument
     if mode == 'up':
-        # Move the servo up by decreasing the position by degree
-        controller.up(degree)
-    elif mode == 'down':
-        # Move the servo down by increasing the position by degree
-        controller.down(degree)
+        # Move the servo up by increasing the position by degree
+        controller.move(degree)
+    else:
+        # Move the servo down by decreasing the position by degree
+        controller.move(degree*-1)
 
     # Clean up GPIO pins
     controller.cleanup()
