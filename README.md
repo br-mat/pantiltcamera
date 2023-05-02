@@ -31,8 +31,8 @@ The servo angle can be incremented or decremented using the up and down methods.
 
 In order to work with motionEye Action buttons there need to be files called left_n, right_n, up_n and down_n in the configuration folder off motionEye (the n stands for camera index). Make sure they are executable. <br>
 
-Short example on how the script works, be sure to run this from within the repository or the motionEye config folder (you have to the scripts): <br>
-By calling the moveServo.py function we can pass a pin a method name and an optional angle.
+Short example on how the 'moveServo.py' script works, be sure to run this from within the repository or the motionEye config folder: <br>
+By calling the 'moveServo.py' function we have to pass function parameters containing a pin a method name and an optional angle.
 
     #   Pin-number method (optional angle)
     python moveServo.py 12 'up' 20
@@ -40,7 +40,8 @@ By calling the moveServo.py function we can pass a pin a method name and an opti
  However the pin need to be configured in this python script first, by default I'm using 12 and 13. You can find this in the main block of the moveServo.py file:
 
     # Define the dictionary of valid pins and their corresponding directions
-    valid_pins = {12: 'horizontal', 13: 'vertical'}
+    # HINT: Class will validate keys in the position file to match 'horizontal or 'vertical'
+    valid_direction = {12: 'horizontal', 13: 'vertical'}
 
 ## Schematic
 
