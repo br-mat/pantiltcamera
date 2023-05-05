@@ -17,16 +17,16 @@ to enable cam:
 prepare servo packages (run this line by line!!!): <br>
 
     sudo su
+    
+    apt-get install python3-pip
 
-    apt-get install python3-rpi.gpio
+    apt-get install python3-rpi.gpio pigpio python-pigpio python3-pigpio
 
     pip3 install gpiozero
 
 if you want to start the gpio deamon manually: 'sudo pigpiod' <br>
 
 make sure pigpio autostart on every boot:
-
-    apt-get install pigpio
 
     systemctl start pigpiod
 
