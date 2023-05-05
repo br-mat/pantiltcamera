@@ -36,8 +36,17 @@ Make things easy
 now change your password (IMPORTANT!) and remember it (Optional?)
 
     passwd root
+    
+by default on most Pi's the command 'sudo su' wont ask for password, let's change that
 
-update your system
+    sudo visudo /etc/sudoers.d/010_pi-nopasswd
+    
+now you should be able to see the line: pi ALL=(ALL) NOPASSWD: ALL <br>
+change it to:
+
+    pi ALL=(ALL) ALL
+
+then update your system
 
     apt-get update && apt-get upgrade -y
 
