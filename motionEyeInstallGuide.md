@@ -41,7 +41,7 @@ by default on most Pi's the command 'sudo su' wont ask for password, let's chang
 
     sudo visudo /etc/sudoers.d/010_pi-nopasswd
     
-now you should be able to see the line: pi ALL=(ALL) NOPASSWD: ALL <br>
+now you should be able to see the line: 'pi ALL=(ALL) NOPASSWD: ALL' <br>
 change it to:
 
     pi ALL=(ALL) ALL
@@ -53,12 +53,12 @@ then update your system
 install a bunch of packages (execute ALL following code line by line!!!)
 
     apt-get install ffmpeg libmariadb3 libpq5 libmicrohttpd12 -y
+    
+    wget https://github.com/Motion-Project/motion/releases/download/release-4.3.2/pi_buster_motion_4.3.2-1_armhf.deb
 
     dpkg -i pi_buster_motion_4.3.2-1_armhf.deb
 
-    apt-get install python-pip python-dev libssl-dev
-
-    libcurl4-openssl-dev libjpeg-dev libz-dev -y
+    apt-get install python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev libz-dev -y
 
 Hint: if you run into an issue with pill --> (if pill hang at 99% run the following: 'apt-get install python-pil -y' and then again 'pip install motioneye')
 
