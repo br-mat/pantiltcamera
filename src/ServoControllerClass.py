@@ -22,7 +22,7 @@ import time
 import json
 
 class ServoController:
-    def __init__(self, servo_pin, direction, position_file):
+    def __init__(self, servo_pin: int, direction: str, position_file: str):
         # Initialize GPIO and servo motor
         self.factory = PiGPIOFactory()
         self.servo = Servo(servo_pin, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000, pin_factory=self.factory)
@@ -49,7 +49,7 @@ class ServoController:
         # If all checks passed, return True
         return True
 
-    def move(self, angle):
+    def move(self, angle: int):
         # Move the servo down by increasing the position by degree
         try:
             degree_int = int(angle)
@@ -76,13 +76,12 @@ class ServoController:
                 position = json.load(f)[self.dir]
                 # Validate the loaded position data
                 if not self.validate_position(position):
-                    raise ValueError("Invalid position data: {}".format(position))
+                    raise ValueError(f"Invalid position data: {position}")
                 return position
         except FileNotFoundError:
             return 0
         except json.JSONDecodeError as e:
-            raise ValueError("Error decoding JSON in {}: {}".format(self.position_file, e))
-
+            raise ValueError(f"Error decoding JSON in {self.position_file}: {e}")
     
     def save_position(self):
         # Load the position from the file for all directions

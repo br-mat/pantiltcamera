@@ -44,8 +44,8 @@ if __name__ == '__main__':
     valid_direction = {12: 'horizontal', 13: 'vertical'}
 
     # Check that the pin argument is in the valid_direction dictionary
-    if pin not in list(valid_direction.keys()):
-        raise ValueError("Error: PIN must be one of {}".format(list(valid_direction.keys())))
+    if pin not in valid_direction:
+        raise ValueError(f"Error: PIN must be one of {list(valid_direction.keys())}")
 
     # Check that the mode argument is either 'up' or 'down'
     if mode not in ['up', 'down']:

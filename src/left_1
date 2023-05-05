@@ -1,2 +1,2 @@
 #!/bin/bash
-python moveServo.py 12 'down' 20
+python3 moveServo.py 12 'down' 20
