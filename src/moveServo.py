@@ -32,7 +32,7 @@ from ServoControllerClass import ServoController
 if __name__ == '__main__':
     # Check that at least two arguments are passed
     if len(sys.argv) < 3:
-        raise ValueError("Usage: python vertical_up.py PIN MODE [DEGREE]")
+        raise ValueError("Usage: python vertical_up.py PIN MODE DEGREE")
 
     # Parse the command line arguments
     pin = int(sys.argv[1])
