@@ -32,23 +32,6 @@ class ServoController:
         self.position_file = position_file
         self.position = self.load_position()
 
-    def validate_position(self, data):
-        # Define the expected keys for the data dictionary
-        expected_keys = {"horizontal", "vertical"}
-        
-        # Check if the keys in the data dictionary match the expected keys
-        if set(data.keys()) != expected_keys:
-            return False
-        
-        # Iterate over each key-value pair in the data dictionary
-        for value in data.items():
-            # Check if the value is an integer and if it's within the range [0, 180]
-            if not isinstance(value, int):
-                return False
-        
-        # If all checks passed, return True
-        return True
-
     def move(self, angle: int):
         # Move the servo down by increasing the position by degree
         try:
@@ -70,19 +53,30 @@ class ServoController:
         self.save_position()
 
     def load_position(self):
-        # Load the position from the file for the given direction
+        # Define the expected keys for the data dictionary
+        expected_keys = {"horizontal", "vertical"}
+
         try:
             with open(self.position_file, 'r') as f:
-                position = json.load(f)[self.dir]
-                # Validate the loaded position data
-                if not self.validate_position(position):
-                    raise ValueError(f"Invalid position data: {position}")
-                return position
+                data = json.load(f)
+                
+                # Check if the keys in the data dictionary match the expected keys
+                if set(data.keys()) != expected_keys:
+                    raise ValueError(f"Invalid dictionary key: should be {expected_keys.keys()}")
+
+                # Check if the direction key exists in the loaded data
+                if self.dir in data:
+                    position = data[self.dir]
+                    # Validate the loaded position data
+                    return position
+                else:
+                    return {"horizontal": 90, "vertical": 90}  # Default position if direction key is missing
+
         except FileNotFoundError:
-            return 0
+            return {"horizontal": 90, "vertical": 90}  # Default position if file is not found
         except json.JSONDecodeError as e:
             raise ValueError(f"Error decoding JSON in {self.position_file}: {e}")
-    
+
     def save_position(self):
         # Load the position from the file for all directions
         try:
