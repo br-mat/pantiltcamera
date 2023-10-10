@@ -27,6 +27,7 @@
 
 #!/usr/bin/env python
 import sys
+import os
 from ServoControllerClass import ServoController
 
 if __name__ == '__main__':
@@ -38,6 +39,10 @@ if __name__ == '__main__':
     pin = int(sys.argv[1])
     mode = sys.argv[2]
     degree = int(sys.argv[3]) if len(sys.argv) > 3 else 20
+    
+    # set the directory paths
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    position_file = os.path.join(script_dir, 'position.json')
 
     # Define the dictionary of valid pins and their corresponding directions
     # HINT: Class will validate keys in the position file to match 'horizontal or 'vertical'
@@ -56,7 +61,7 @@ if __name__ == '__main__':
         raise ValueError("Error: DEGREE must be between 0 and 360")
 
     # Create a servo controller instance for the specified pin and direction
-    controller = ServoController(pin, valid_direction[pin], '/home/youruser/pantiltcamera/src/position.json')
+    controller = ServoController(pin, valid_direction[pin], position_file)
 
     # Move the servo up or down based on the mode argument
     if mode == 'up':

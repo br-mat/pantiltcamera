@@ -35,9 +35,9 @@ Short example on how the 'moveServo.py' script works, be sure to run this from w
 By calling the 'moveServo.py' function we have to pass function parameters containing a pin a method name and an optional angle.
 
     #   Pin-number method (optional angle)
-    python moveServo.py 12 'up' 30
+    python3 moveServo.py 12 'up' 30
     # or
-    python moveServo.py 12 'down'
+    python3 moveServo.py 12 'down'
 
  However the pin need to be configured in this python script first, by default I'm using 12 and 13. You can find this in the main block of the moveServo.py file:
 
